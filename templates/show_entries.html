@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block body %}
+  <h2>Accounts</h2>
+  <table class="entries">
+    {% if entries %}
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Number</th>
+        <th>Infra ID</th>
+        <th>Infra IP</th>
+        <th>Admin User</th>
+        <th>Admin Pass</th>
+      </tr>
+      {% for entry in entries %}
+        <tr class="{% if entry.id % 2 %}odd{% else %}even{% endif %}">
+          <td><a class="fancy" href="/{{ entry.id }}">{{ entry.id }}</a></td>
+          <td><a class="fancy" href="/{{ entry.id }}">{{ entry.account_name }}</a></td>
+          <td><a href="https://core.rackspace.com/py/core/#/account/{{ entry.account_number }}">
+            {{ entry.account_number }}</a></td>
+          <td><a href="https://core.rackspace.com/py/core/#/device/{{ entry.controller_id }}/details">
+            {{ entry.controller_id }}</a></td>
+          <td>{{ entry.controller_ip }}</td>
+          <td>{{ entry.admin_user }}</td>
+          <td>{{ entry.admin_pass }}</td>
+        </tr>
+      {% endfor %}
+    {% else %}
+      <tr><td><em>Nothing but cobwebs.</em></td</tr>
+    {% endif %}
+  </table>
+  <a class="button fancy" href="{{ url_for('add_account') }}">Add Account</a>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block body %}
+  {% if account %}
+    <dl>
+      <dt><h2>{{ account.account_number }} {{ account.account_name }}</h2></dt>
+      <dd>
+        <div><p class="item">Controller ID:</p> {{ account.controller_id }}</div>
+        <div><p class="item">Controller IP:</p> {{ account.controller_ip }}</div>
+        <div><p class="item">Admin Username:</p> {{ account.admin_user }}</div>
+        <div><p class="item">Admin Password:</p> {{ account.admin_pass }}</div>
+        <div><p class="item">Created:</p> {{ account.created_at }}</div>
+        <div><p class="item">Updated:</p> {{ account.updated_at }}</div>
+        <div><p class="item">Notes:</p> {{ md.convert(account.notes)|safe }}</div>
+      </dd>
+    </dl>
+    <a class="button" type="submit" href="{{ url_for('edit_account', account_id=account.id) }}">Edit</a>
+  {% else %}
+    <em>No such account!</em>
+  {% endif %}
+  <!-- edit and delete buttons -->
+{% endblock %}

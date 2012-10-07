@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block body %}
+  <h2>Search</h2>
+  <form class="entries" action="{{ url_for('search') }}" method="post">
+    <select name="search_by">
+      <option value="account_name">Account Name</option>
+      <option value="account_id">Account ID</option>
+      <option value="controller_id">Controller ID</option>
+      <option value="controller_ip">Controller IP</option>
+    </select>
+    <input type="text" name="search_text" />
+    <p><a class="button fancy" href="javascript:submit()">Submit</a></p>
+  </form>
+{% endblock %}

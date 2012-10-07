@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block body %}
+  <h2>Add Account</h2>
+  <form action="{{ url_for('add_account') }}" method="post">
+    <table>
+      <tr>
+        <td>Name:<br/> <input type="text" name="account_name"></td>
+        <td>CORE ID:<br/> <input name="account_number"></td>
+      </tr>
+      <tr>
+        <td>Infra ID:<br/> <input type="text" name="controller_id"></td>
+        <td>Infra IP:<br/> <input type="text" name="controller_ip"></td>
+      </tr>
+      <tr>
+        <td>Admin User:<br/> <input type="text" name="admin_user"></td>
+        <td>Admin Pass:<br/> <input type="text" name="admin_pass"></td>
+      </tr>
+      <tr>
+        <td colspan="2">Notes:<br/> <textarea name="notes"></textarea></td>
+      </tr>
+      <tr>
+        <td><a class="button" type="submit" href="javascript:submit()">Submit</td>
+      </tr>
+    </table>
+  </form>
+{% endblock %}

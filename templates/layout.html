@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Account Tracker (v{{ config['version'] }})</title>
+    <link rel=stylesheet type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='jquery-1.7.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
+  </head>
+  <body>
+    <div class="page">
+      <a href="/"><h1 class="head">Account Tracker (v{{ config['version'] }})</h1></a>
+      <div class="flasher">
+        {% set i = 0 %}
+        {% for message in get_flashed_messages() %}
+          <span id="flashbanner_{{ i }}" class="flash">{{ message }}</span>
+          <script type="text/javascript">
+          var elm_{{ i }} = $('#flashbanner_{{ i }}');
+          elm_{{ i }}.click(function() { elm_{{ i }}.fadeOut('slow'); });
+          window.setTimeout(function() { elm_{{ i }}.fadeOut('slow'); }, 3000);
+          </script>
+          {% set i = i + 1 %}
+        {% endfor %}
+        &nbsp;
+      </div>
+      <div class="metanav">
+        <a class="button" href="{{ url_for('search') }}">Search</a>
+        {% if not hide_login %}
+          {% if not session.logged_in %}
+            <a class="button" href="{{ url_for('login') }}">Login</a>
+          {% else %}
+            <a class="button" href="{{ url_for('logout') }}">Logout</a>
+          {% endif %}
+        {% endif %}
+      </div>
+      <br class="clear" />
+      {% block body %}{% endblock %}
+    </div>
+  </body>
+</html>
